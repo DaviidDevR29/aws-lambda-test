@@ -27,4 +27,3 @@ jobs:
         continue-on-error: true  
       - name: Update Lambda Function    
         run: aws lambda update-function-code --function-name HandlerString --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
-    
