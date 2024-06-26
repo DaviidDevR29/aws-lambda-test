@@ -5,8 +5,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      REGION: us-east-2
     steps:
       - name: Code Checkout
         uses: actions/checkout@v3
@@ -22,10 +20,11 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.REGION }}
+          aws-region: us-east-2
       - name: Create AWS Lambda Function
         run: |
           aws lambda create-function --function-name HandlerString --runtime java17 --handler integration.ninjas.HandlerString::handleRequest --role arn:aws:iam::897416488564:role/lambda_ex --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
         continue-on-error: true
       - name: Update Lambda Function
         run: aws lambda update-function-code --function-name HandlerString --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
+    
