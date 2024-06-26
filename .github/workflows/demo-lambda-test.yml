@@ -9,7 +9,7 @@ jobs:
       AWS_ACC_KEY: AWS.AWS_ACCESS_KEY_ID
       AWS_ACC_SECRET: AWS.AWS_SECRET_ACCESS_KEY
     steps:
-      - run: echo "$AWS_ACC_KEY!"
+      - run: echo "$AWS_ACC_KEY! / ${{AWS.AWS_ACCESS_KEY_ID}}"
       - name: Code Checkout
         uses: actions/checkout@v3
       - name: Setup Java
