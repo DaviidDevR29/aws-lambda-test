@@ -7,7 +7,7 @@ jobs:
     environment:
       name: AWS
     steps:
-      - run: echo ${{ AWS_ACCESS_KEY_ID }}
+      - run: echo "$AWS_ACCESS_KEY_ID!"
       - name: Code Checkout
         uses: actions/checkout@v3
       - name: Setup Java
@@ -26,3 +26,4 @@ jobs:
       - name: Create AWS Lambda Function
         run: |
           aws lambda create-function --function-name HandlerString --runtime java17 --handler integration.ninjas.HandlerString::handleRequest --role arn:aws:iam::897416488564:role/lambda_ex --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
+      
