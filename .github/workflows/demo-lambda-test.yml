@@ -4,10 +4,12 @@ on: [push]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: AWS
+    env:
+      REGION: us-east-2
+      AWS_ACC_KEY: AWS.AWS_ACCESS_KEY_ID
+      AWS_ACC_SECRET: AWS.AWS_SECRET_ACCESS_KEY
     steps:
-      - run: echo "$AWS_ACCESS_KEY_ID!"
+      - run: echo "$AWS_ACC_KEY!"
       - name: Code Checkout
         uses: actions/checkout@v3
       - name: Setup Java
@@ -28,4 +30,4 @@ jobs:
           aws lambda create-function --function-name HandlerString --runtime java17 --handler integration.ninjas.HandlerString::handleRequest --role arn:aws:iam::897416488564:role/lambda_ex --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
         continue-on-error: true
       - name: Update Lambda Function
-        run: aws lambda wait function-updated --function-name HandlerString --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
+        run: aws lambda update-function-code --function-name HandlerString --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
