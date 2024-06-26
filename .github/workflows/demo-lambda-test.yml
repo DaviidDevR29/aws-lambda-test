@@ -4,12 +4,10 @@ on: [push]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      REGION: us-east-2
-      AWS_ACC_KEY: AWS.AWS_ACCESS_KEY_ID
-      AWS_ACC_SECRET: AWS.AWS_SECRET_ACCESS_KEY
+    environment:
+      name: AWS
     steps:
-      - run: echo "$AWS_ACC_KEY! / ${{AWS.AWS_ACCESS_KEY_ID}}"
+      - run: echo "$AWS_ACCESS_KEY_ID!"
       - name: Code Checkout
         uses: actions/checkout@v3
       - name: Setup Java
