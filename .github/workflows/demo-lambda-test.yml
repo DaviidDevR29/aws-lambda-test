@@ -28,4 +28,4 @@ jobs:
           aws lambda create-function --function-name HandlerString --runtime java17 --handler integration.ninjas.HandlerString::handleRequest --role arn:aws:iam::897416488564:role/lambda_ex --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
         continue-on-error: true
       - name: Update Lambda Function
-        run: aws lambda update-function-code --function-name HandlerString --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
+        run: aws lambda wait function-updated --function-name HandlerString --zip-file fileb://target/lambda-basic-1.0-SNAPSHOT.jar
